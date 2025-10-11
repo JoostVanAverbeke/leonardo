@@ -41,7 +41,7 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">Municipality:</strong>
-    <%= patient.municipality_id %>
+    <%= patient.municipality.externalize if patient.municipality_id %>
   </div>
   <div>
     <strong class="block font-medium mb-1">National number:</strong>
