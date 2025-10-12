@@ -70,6 +70,13 @@ group :development, :test do
 
   # Use RSpec for tests
   gem "rspec-rails", "~> 8.0", ">= 8.0.2"
+
+  # factory_bot_rails provides integration between factory_bot and Rails 6.1 or newer
+  gem "factory_bot_rails", "~> 6.5", ">= 6.5.1"
+
+  # Faker, a port of Data::Faker from Perl, is used to easily generate fake data:
+  # names, addresses, phone numbers
+  gem "faker", "~> 3.5", ">= 3.5.2"
 end
 
 group :development do

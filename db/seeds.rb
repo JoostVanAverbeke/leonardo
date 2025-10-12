@@ -7,3 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "factory_bot_rails"
+require "faker"
+
+Faker::Config.locale = :nl
+# Create some patients and municipalities for development and test environments
+1000.times do
+    patient = FactoryBot.create(:patient)
+    puts "Created patient #{patient.first_name} #{patient.surname} in #{patient.municipality.postal_code} #{patient.municipality.city}, #{patient.municipality.country}"
+end
