@@ -5,6 +5,7 @@ FactoryBot.define do
         surname { Faker::Name.last_name }
         birth_date { Faker::Date.birthday(min_age: 0, max_age: 120) }
         gender { %w[male female other].sample }
+        address_line1 { Faker::Address.street_address }
         municipality { association :municipality }
         sequence(:email) { |n| "user#{n}@example.com" }
         phone { "+31#{Faker::Number.number(digits: 9)}" }
