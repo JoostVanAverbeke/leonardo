@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "patients/edit", type: :view do
   let(:patient) {
@@ -25,7 +25,6 @@ RSpec.describe "patients/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", patient_path(patient), "post" do
-
       assert_select "input[name=?]", "patient[first_name]"
 
       assert_select "input[name=?]", "patient[surname]"

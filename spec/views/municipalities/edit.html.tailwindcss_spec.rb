@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "municipalities/edit", type: :view do
   let(:municipality) {
@@ -17,7 +17,6 @@ RSpec.describe "municipalities/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", municipality_path(municipality), "post" do
-
       assert_select "input[name=?]", "municipality[postal_code]"
 
       assert_select "input[name=?]", "municipality[city]"
