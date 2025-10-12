@@ -71,5 +71,14 @@ Create the Patients model:
     rails generate scaffold Patients first_name:string surname:string birth_date:date gender:integer email:string phone:string mobile_phone:string internet:string address_line1:string address_line2:string municipality:references national_number:string
 ```
 
+## Model Context Protocol Server
 
+### How to verify the tools?
+
+See also [Turn Your Rails App into an AI-Ready MCP Server with FastMCP](https://medium.com/@andrescoronel1209/turn-your-rails-app-into-an-ai-ready-mcp-server-with-fastmcp-883fcf165b96)
+
+Execute the following command:
+```
+    npx @modelcontextprotocol/inspector
+```
 
