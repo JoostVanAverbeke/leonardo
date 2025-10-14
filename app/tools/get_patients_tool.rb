@@ -32,7 +32,12 @@ class GetPatientsTool < ApplicationTool
                 "gender": "male",
                 "address_line1": "456 Elm St",
                 "address_line2": "Suite 5A",
-                "municipality_id": 1,
+                "municipality": {
+                    "id": 1,
+                    "postal_code": "1000",
+                    "city": "Brussels",
+                    "country": "BE"
+                },
                 "created_at": "2023-10-01T12:00:00Z",
                 "updated_at": "2023-10-01T12:00:00Z"
             },
@@ -49,7 +54,12 @@ class GetPatientsTool < ApplicationTool
                 "gender": "female",
                 "address_line1": "123 Main St",
                 "address_line2": "Apt 4B",
-                "municipality_id": 2,
+                "municipality": {
+                    "id": 2,
+                    "postal_code": "2000",
+                    "city": "Antwerp",
+                    "country": "BE"
+                },
                 "created_at": "2023-10-02T12:00:00Z",
                 "updated_at": "2023-10-02T12:00:00Z"
             }
@@ -87,7 +97,12 @@ class GetPatientsTool < ApplicationTool
                 gender: patient.gender,
                 address_line1: patient.address_line1,
                 address_line2: patient.address_line2,
-                municipality_id: patient.municipality_id,
+                municipality: patient.municipality ? {
+                    id: patient.municipality.id,
+                    postal_code: patient.municipality.postal_code,
+                    city: patient.municipality.city,
+                    country: patient.municipality.country
+                } : nil,
                 created_at: patient.created_at.iso8601,
                 updated_at: patient.updated_at.iso8601
             }
