@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_12_152546) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_14_172610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,7 +20,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_152546) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["country", "postal_code"], name: "index_municipalities_on_country_and_postal_code"
+    t.index ["city", "country"], name: "index_municipalities_on_city_and_country"
+    t.index ["postal_code", "country"], name: "index_municipalities_on_postal_code_and_country"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -38,7 +39,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_152546) do
     t.string "national_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["birth_date", "surname"], name: "index_patients_on_birth_date_and_surname"
+    t.index ["email"], name: "index_patients_on_email"
     t.index ["municipality_id"], name: "index_patients_on_municipality_id"
+    t.index ["national_number"], name: "index_patients_on_national_number"
+    t.index ["surname", "first_name"], name: "index_patients_on_surname_and_first_name"
   end
 
   add_foreign_key "patients", "municipalities"
