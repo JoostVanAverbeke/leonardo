@@ -60,17 +60,22 @@ Run the tailwindccs build for the first time:
 ## Model Schema
 
 ### Municipalities
-Create the Municipalities model:
+Create the Municipality model:
 ```
     rails generate scaffold Municipalities postal_code:string city:string country:string
 ```
 
 ### Patients
-Create the Patients model:
+Create the Patient model:
 ```
     rails generate scaffold Patients first_name:string surname:string birth_date:date gender:integer email:string phone:string mobile_phone:string internet:string address_line1:string address_line2:string municipality:references national_number:string
 ```
 
+### HcProviders
+Create the HcProvider model
+```
+rails generate scaffold HcProviders mnemonic:string first_name:string surname:string birth_date:date gender:integer email:string phone:string mobile_phone:string internet:string address_line1:string address_line2:string municipality:references identifier:string title:string
+```
 ## Model Context Protocol Server
 
 ### How to verify the tools?

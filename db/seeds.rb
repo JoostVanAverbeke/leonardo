@@ -16,3 +16,7 @@ Faker::Config.locale = :nl
     patient = FactoryBot.create(:patient)
     puts "Created patient #{patient.first_name} #{patient.surname} in #{patient.municipality.postal_code} #{patient.municipality.city}, #{patient.municipality.country}"
 end
+200.times do
+    hc_provider = FactoryBot.create(:hc_provider)
+    puts "Created hc_provider #{hc_provider.mnemonic} #{hc_provider.first_name} #{hc_provider.surname} in #{hc_provider.municipality.postal_code} #{hc_provider.municipality.city}, #{hc_provider.municipality.country}"
+end

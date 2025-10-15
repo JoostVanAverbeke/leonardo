@@ -1,5 +1,6 @@
 class Municipality < ApplicationRecord
     has_many :patients, dependent: :nullify
+    has_many :hc_providers, dependent: :nullify
 
     validates :postal_code, presence: true
     validates :city, presence: true

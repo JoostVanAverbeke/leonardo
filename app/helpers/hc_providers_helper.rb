@@ -1,0 +1,2 @@
+module HcProvidersHelper
+end

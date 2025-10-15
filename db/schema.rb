@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_14_172610) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_15_174656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "hc_providers", force: :cascade do |t|
+    t.string "mnemonic"
+    t.string "first_name"
+    t.string "surname"
+    t.date "birth_date"
+    t.integer "gender"
+    t.string "email"
+    t.string "phone"
+    t.string "mobile_phone"
+    t.string "internet"
+    t.string "address_line1"
+    t.string "address_line2"
+    t.bigint "municipality_id", null: false
+    t.string "identifier"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["birth_date", "surname"], name: "index_hc_providers_on_birth_date_and_surname"
+    t.index ["email"], name: "index_hc_providers_on_email"
+    t.index ["identifier"], name: "index_hc_providers_on_identifier"
+    t.index ["mnemonic"], name: "index_hc_providers_on_mnemonic", unique: true
+    t.index ["municipality_id"], name: "index_hc_providers_on_municipality_id"
+    t.index ["surname", "first_name"], name: "index_hc_providers_on_surname_and_first_name"
+  end
 
   create_table "municipalities", force: :cascade do |t|
     t.string "postal_code"
@@ -46,5 +71,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_14_172610) do
     t.index ["surname", "first_name"], name: "index_patients_on_surname_and_first_name"
   end
 
+  add_foreign_key "hc_providers", "municipalities"
   add_foreign_key "patients", "municipalities"
 end
