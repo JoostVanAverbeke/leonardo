@@ -21,7 +21,7 @@ RSpec.describe HcProvider, type: :model do
       expect(subject).to be_valid
     end
 
-    [:mnemonic, :first_name, :surname].each do |attr|
+    [ :mnemonic, :first_name, :surname ].each do |attr|
       it "validates presence of #{attr}" do
         subject.send("#{attr}=", nil)
         expect(subject).not_to be_valid
