@@ -1,29 +1,64 @@
-<% content_for :title, "Municipalities" %>
-
 <div class="w-full">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Municipalities</h1>
-    <%= link_to "New municipality", new_municipality_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  <div class="flex justify-center">
+    <nav aria-label="Pagination">
+      <ul class="inline-flex items-center space-x-1 rounded-md text-sm">
+        <li>
+          <%= link_to_previous_page @municipalities, 'Previous Page', class: "inline-flex items-center space-x-2 rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-500 hover:bg-gray-50" do %>
+            <% if path_to_prev_page @municipalities %>
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+              </svg>
+            <% end %>
+          <% end %>  
+        </li>
+        <li>
+          <span class="inline-flex items-center rounded-md bg-white px-4 py-2 text-gray-500">Page <b class="mx-1"><%= @municipalities.current_page %></b> of <b class="ml-1"><%= @municipalities.total_pages %></b></span>
+        </li>
+        <li>
+          <%= link_to_next_page @municipalities, 'Next Page', class: "inline-flex items-center space-x-2 rounded-md border border-gray-300 bg-white px-4 py-2 font-medium text-gray-500 hover:bg-gray-50" do %>
+            <% if path_to_next_page @municipalities %>
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+              </svg>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
   </div>
 
-  <div id="municipalities" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @municipalities.any? %>
-      <% @municipalities.each do |municipality| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render municipality %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", municipality, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_municipality_path(municipality), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Destroy", municipality, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No municipalities found.</p>
-    <% end %>
+  <% content_for :title, "Municipalities" %>
+  
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Municipalities</h1>
+    <%= link_to "New municipality", new_municipality_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div id="Municipalities" class="min-w-full">
+    <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Id</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">country</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">postal_code</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">City</th>      
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+        <% @municipalities.each do |municipality| %>
+          <tr id="<%= dom_id municipality %>">
+            <%= render municipality %>
+            <td class="flex justify-end gap-4 px-6 py-4 font-medium">
+              <%= link_to "Show", municipality, class: "text-primary-700" %>
+              <%= link_to "Edit", edit_municipality_path(municipality) %>
+          </tr>  
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

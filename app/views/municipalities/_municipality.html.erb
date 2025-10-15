@@ -1,14 +1,4 @@
-<div id="<%= dom_id municipality %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Postal code:</strong>
-    <%= municipality.postal_code %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">City:</strong>
-    <%= municipality.city %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Country:</strong>
-    <%= municipality.country %>
-  </div>
-</div>
+<th class="px-6 py-4 font-medium text-gray-900"><%= municipality.id %></th>
+<td class="px-6 py-4"><%= municipality.country%></td>
+<td class="px-6 py-4"><%= municipality.postal_code %></td>
+<td class="px-6 py-4"><%= municipality.city %></td>

@@ -3,7 +3,7 @@ class MunicipalitiesController < ApplicationController
 
   # GET /municipalities or /municipalities.json
   def index
-    @municipalities = Municipality.all
+    @municipalities = Municipality.order(:country, :postal_code, :city).page(params[:page])
   end
 
   # GET /municipalities/1 or /municipalities/1.json

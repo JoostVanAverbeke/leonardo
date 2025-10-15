@@ -58,6 +58,9 @@ gem "tailwindcss-rails", "~> 4.3"
 # Provides a simple helper to get an HTML select list of countries.
 gem "country_select", "~> 11.0"
 
+# Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 4+
+gem "kaminari", "~> 1.2", ">= 1.2.2"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
