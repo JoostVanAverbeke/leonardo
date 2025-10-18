@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :properties
   resources :hc_providers
   resources :patients
   resources :municipalities

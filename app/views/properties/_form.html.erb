@@ -1,0 +1,52 @@
+<%= form_with(model: property, class: "contents") do |form| %>
+  <% if property.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% property.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :mnemonic %>
+    <%= form.text_field :mnemonic, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:mnemonic].none?, "border-red-400 focus:outline-red-600": property.errors[:mnemonic].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :loinc_code %>
+    <%= form.text_field :loinc_code, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:loinc_code].none?, "border-red-400 focus:outline-red-600": property.errors[:loinc_code].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :units_of_measure %>
+    <%= form.text_field :units_of_measure, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:units_of_measure].none?, "border-red-400 focus:outline-red-600": property.errors[:units_of_measure].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :low_limit %>
+    <%= form.text_field :low_limit, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:low_limit].none?, "border-red-400 focus:outline-red-600": property.errors[:low_limit].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :high_limit %>
+    <%= form.text_field :high_limit, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:high_limit].none?, "border-red-400 focus:outline-red-600": property.errors[:high_limit].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :data_type %>
+    <%= form.select :data_type, Property.data_types.keys.map { |g| [g.humanize, g] }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:data_type].none?, "border-red-400 focus:outline-red-600": property.errors[:data_type].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": property.errors[:description].none?, "border-red-400 focus:outline-red-600": property.errors[:description].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
