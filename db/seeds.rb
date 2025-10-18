@@ -20,3 +20,9 @@ end
     hc_provider = FactoryBot.create(:hc_provider)
     puts "Created hc_provider #{hc_provider.mnemonic} #{hc_provider.first_name} #{hc_provider.surname} in #{hc_provider.municipality.postal_code} #{hc_provider.municipality.city}, #{hc_provider.municipality.country}"
 end
+
+# Create some properties for development and test environments
+50.times do
+    property = FactoryBot.create(:property)
+    puts "Created property #{property.mnemonic} #{property.description} (Loinc: #{property.loinc_code})"
+end

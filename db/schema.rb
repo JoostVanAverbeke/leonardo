@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_15_174656) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_18_064624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_174656) do
     t.index ["municipality_id"], name: "index_patients_on_municipality_id"
     t.index ["national_number"], name: "index_patients_on_national_number"
     t.index ["surname", "first_name"], name: "index_patients_on_surname_and_first_name"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "mnemonic"
+    t.string "loinc_code"
+    t.string "units_of_measure"
+    t.decimal "low_limit"
+    t.decimal "high_limit"
+    t.integer "data_type"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "hc_providers", "municipalities"
