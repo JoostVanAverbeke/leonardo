@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Leonardo" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -22,9 +22,65 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-3">
+            <a href="#" class="flex items-center space-x-3">
+              <img src="/icon.svg" alt="Leonardo" class="h-8 w-8" />
+              <span class="font-semibold text-lg">Leonardo</span>
+            </a>
+            <nav class="hidden md:flex space-x-2 text-sm text-gray-600">
+              <a href="#" class="px-2 py-1 rounded hover:bg-gray-100">Configuration</a>
+              <a href="#" class="px-2 py-1 rounded hover:bg-gray-100">Routine</a>
+            </nav>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="hidden sm:flex items-center text-sm text-gray-600">Signed in as <strong class="ml-2">Guest</strong></div>
+            <a href="#" class="inline-flex items-center px-3 py-1 rounded bg-blue-600 text-white text-sm hover:bg-blue-700">New</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main: sidebar + content -->
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="hidden md:block w-64 bg-white border-r border-gray-200 overflow-y-auto">
+        <div class="px-4 py-6">
+          <nav class="space-y-1">
+            <%= link_to "Patients", patients_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
+            <%= link_to "Municipalities", municipalities_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
+            <%= link_to "HcProviders", hc_providers_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
+            <%= link_to "Properties", properties_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Content area -->
+      <main class="flex-1 overflow-y-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="bg-white shadow-sm rounded-lg p-6">
+            <%= yield %>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Sticky footer -->
+    <footer class="bg-white border-t border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 text-sm text-gray-600">
+          <div>© <%= Time.current.year %> Leonardo</div>
+          <div class="flex items-center space-x-4">
+            <a href="#" class="hover:underline">Privacy</a>
+            <a href="#" class="hover:underline">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
