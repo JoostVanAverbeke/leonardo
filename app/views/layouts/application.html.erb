@@ -33,8 +33,8 @@
               <span class="font-semibold text-lg">Leonardo</span>
             </a>
             <nav class="hidden md:flex space-x-2 text-sm text-gray-600">
-              <a href="#" class="px-2 py-1 rounded hover:bg-gray-100">Configuration</a>
-              <a href="#" class="px-2 py-1 rounded hover:bg-gray-100">Routine</a>
+              <%= link_to "Configuration", url_for(params.permit!.to_h.merge(menu_nav: 'configuration')), class: "px-2 py-1 rounded #{'bg-gray-100' if @active_menu_nav == 'configuration'}" %>
+              <%= link_to "Routine", url_for(params.permit!.to_h.merge(menu_nav: 'routine')), class: "px-2 py-1 rounded #{'bg-gray-100' if @active_menu_nav == 'routine'}" %>
             </nav>
           </div>
 
@@ -51,12 +51,8 @@
       <!-- Sidebar -->
       <aside class="hidden md:block w-64 bg-white border-r border-gray-200 overflow-y-auto">
         <div class="px-4 py-6">
-          <nav class="space-y-1">
-            <%= link_to "Patients", patients_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
-            <%= link_to "Municipalities", municipalities_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
-            <%= link_to "HcProviders", hc_providers_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
-            <%= link_to "Properties", properties_path, class: "flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100" %>
-          </nav>
+          <%# Render server-side nav partial based on @active_menu_nav %>
+          <%= render "layouts/nav_#{@active_menu_nav}" %>
         </div>
       </aside>
 
