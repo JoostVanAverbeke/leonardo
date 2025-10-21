@@ -1,0 +1,62 @@
+<%= form_with(model: order, class: "contents") do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :placer_order_number %>
+    <%= form.text_field :placer_order_number, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:placer_order_number].none?, "border-red-400 focus:outline-red-600": order.errors[:placer_order_number].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :filler_order_number %>
+    <%= form.text_field :filler_order_number, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:filler_order_number].none?, "border-red-400 focus:outline-red-600": order.errors[:filler_order_number].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :priority %>
+    <%= form.select :priority, Order.priorities.keys.map { |g| [g.humanize, g] }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:priority].none?, "border-red-400 focus:outline-red-600": order.errors[:priority].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :order_status %>
+    <%= form.select :order_status, Order.order_statuses.keys.map { |g| [g.humanize, g] }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:order_status].none?, "border-red-400 focus:outline-red-600": order.errors[:order_status].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :patient_id %>
+    <%= form.collection_select :patient_id, Patient.all, :id, :externalize, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:patient_id].none?, "border-red-400 focus:outline-red-600": order.errors[:patient_id].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :ordering_provider_id %>
+    <%= form.collection_select :ordering_provider_id, HcProvider.all, :id, :externalize, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:ordering_provider_id].none?, "border-red-400 focus:outline-red-600": order.errors[:ordering_provider_id].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :relevant_clinical_information %>
+    <%= form.textarea :relevant_clinical_information, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:relevant_clinical_information].none?, "border-red-400 focus:outline-red-600": order.errors[:relevant_clinical_information].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :order_call_back_phone %>
+    <%= form.text_field :order_call_back_phone, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:order_call_back_phone].none?, "border-red-400 focus:outline-red-600": order.errors[:order_call_back_phone].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :receipt_time %>
+    <%= form.datetime_field :receipt_time, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": order.errors[:receipt_time].none?, "border-red-400 focus:outline-red-600": order.errors[:receipt_time].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

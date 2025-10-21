@@ -61,6 +61,10 @@ gem "country_select", "~> 11.0"
 # Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 4+
 gem "kaminari", "~> 1.2", ">= 1.2.2"
 
+# The CSV library provides a complete interface to CSV files and data.
+# It offers tools to enable you to read and write to and from Strings or IO objects, as needed.
+gem "csv", "~> 3.3", ">= 3.3.5"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

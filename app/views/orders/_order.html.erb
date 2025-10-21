@@ -1,0 +1,7 @@
+<th class="px-6 py-4 font-medium text-gray-900"><%= order.id %></th>
+<td class="px-6 py-4"><%= order.receipt_time.strftime("%d/%m/%Y %H:%M:%S") %></td>
+<td class="px-6 py-4"><%= order.filler_order_number %></td>
+<td class="px-6 py-4"><%= order.patient.externalize %></td>
+<td class="px-6 py-4"><%= order.ordering_provider.externalize %></td>
+<td class="px-6 py-4"><%= order.priority %></td>
+<td class="px-6 py-4"><%= order.order_status %></td>

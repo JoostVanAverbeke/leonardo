@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_19_150626) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_21_165649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_19_150626) do
     t.datetime "updated_at", null: false
     t.index ["city", "country"], name: "index_municipalities_on_city_and_country"
     t.index ["postal_code", "country"], name: "index_municipalities_on_postal_code_and_country"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "placer_order_number"
+    t.string "filler_order_number"
+    t.integer "priority"
+    t.integer "order_status"
+    t.bigint "patient_id", null: false
+    t.bigint "ordering_provider_id", null: false
+    t.text "relevant_clinical_information"
+    t.string "order_call_back_phone"
+    t.datetime "receipt_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["filler_order_number"], name: "index_orders_on_filler_order_number", unique: true
+    t.index ["ordering_provider_id", "receipt_time"], name: "index_orders_on_ordering_provider_id_and_receipt_time_desc", order: { receipt_time: :desc }
+    t.index ["ordering_provider_id"], name: "index_orders_on_ordering_provider_id"
+    t.index ["patient_id", "receipt_time"], name: "index_orders_on_patient_id_and_receipt_time_desc", order: { receipt_time: :desc }
+    t.index ["patient_id"], name: "index_orders_on_patient_id"
+    t.index ["receipt_time"], name: "index_orders_on_receipt_time_desc", order: :desc
   end
 
   create_table "patients", force: :cascade do |t|
@@ -86,5 +106,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_19_150626) do
   end
 
   add_foreign_key "hc_providers", "municipalities"
+  add_foreign_key "orders", "hc_providers", column: "ordering_provider_id"
+  add_foreign_key "orders", "patients"
   add_foreign_key "patients", "municipalities"
 end

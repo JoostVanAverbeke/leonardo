@@ -1,5 +1,6 @@
 class Patient < ApplicationRecord
   belongs_to :municipality
+  has_many :orders, dependent: :destroy
 
   validates :first_name, presence: true
   validates :surname, presence: true
@@ -12,4 +13,8 @@ class Patient < ApplicationRecord
   validates :internet, allow_blank: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }
 
   enum :gender, { male: 0, female: 1, other: 2 }
+
+  def externalize
+    "#{surname} #{first_name}, #{birth_date}"
+  end
 end
