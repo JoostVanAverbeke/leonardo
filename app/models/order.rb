@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :patient
   belongs_to :hc_provider, foreign_key: :ordering_provider_id
+  has_many :observations, dependent: :destroy
 
   validates :filler_order_number, presence: true, uniqueness: true
   validates :order_call_back_phone, allow_blank: true, format: { with: /\A\+?[0-9\s\-]+\z/ }

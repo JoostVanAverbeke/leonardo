@@ -10,6 +10,24 @@
 require "factory_bot_rails"
 require "faker"
 
+def create_patients_orders_observations(municipality, hc_provider)
+    25.times do
+        patient = FactoryBot.create(:patient, municipality: municipality)
+        puts "Created patient #{patient.first_name} #{patient.surname} in #{patient.municipality.postal_code} #{patient.municipality.city}, #{patient.municipality.country}"
+        3.times do
+            order = FactoryBot.create(:order, patient: patient, ordering_provider_id: hc_provider.id)
+            puts "Created order #{order.placer_order_number} for patient #{patient.first_name} #{patient.surname} by provider #{hc_provider.mnemonic}"
+            observations_count = rand(1..15)
+            property_counts = Property.count
+            observations_count.times do
+                property = Property.find(rand(1..property_counts))
+                observation = FactoryBot.create(:observation, patient: patient, order: order, property: property)
+                puts "  Created observation #{observation.id} for order #{order.placer_order_number} (property: #{property.mnemonic}, value: #{observation.value} #{observation.unit})"
+            end
+        end
+    end
+end
+
 Faker::Config.locale = :nl
 # Create some properties for development and test environments
 50.times do
@@ -25,25 +43,10 @@ end
     hc_provider1 = FactoryBot.create(:hc_provider, municipality: municipality)
     puts "Created hc_provider #{hc_provider1.mnemonic} #{hc_provider1.first_name} #{hc_provider1.surname} in #{hc_provider1.municipality.postal_code} #{hc_provider1.municipality.city}, #{hc_provider1.municipality.country}"
 
-    25.times do
-        patient = FactoryBot.create(:patient, municipality: municipality)
-        puts "Created patient #{patient.first_name} #{patient.surname} in #{patient.municipality.postal_code} #{patient.municipality.city}, #{patient.municipality.country}"
-        3.times do
-            order = FactoryBot.create(:order, patient: patient, ordering_provider_id: hc_provider1.id)
-            puts "Created order #{order.placer_order_number} for patient #{patient.first_name} #{patient.surname} by provider #{hc_provider1.mnemonic}"
-        end
-    end
-
+    create_patients_orders_observations(municipality, hc_provider1)
     hc_provider2 = FactoryBot.create(:hc_provider, municipality: municipality)
     puts "Created hc_provider #{hc_provider2.mnemonic} #{hc_provider2.first_name} #{hc_provider2.surname} in #{hc_provider2.municipality.postal_code} #{hc_provider2.municipality.city}, #{hc_provider2.municipality.country}"
-    25.times do
-        patient = FactoryBot.create(:patient, municipality: municipality)
-        puts "Created patient #{patient.first_name} #{patient.surname} in #{patient.municipality.postal_code} #{patient.municipality.city}, #{patient.municipality.country}"
-        3.times do
-            order = FactoryBot.create(:order, patient: patient, ordering_provider_id: hc_provider2.id)
-            puts "Created order #{order.placer_order_number} for patient #{patient.first_name} #{patient.surname} by provider #{hc_provider2.mnemonic}"
-        end
-    end
+    create_patients_orders_observations(municipality, hc_provider2)
 end
 
 puts "Seeding completed."

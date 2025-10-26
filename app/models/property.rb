@@ -1,10 +1,15 @@
 class Property < ApplicationRecord
+    has_many :observations, dependent: :destroy
     validates :mnemonic, presence: true, uniqueness: true
     validates :loinc_code, presence: true, uniqueness: true
     validates :description, presence: true
     validates :data_type, presence: true
     validate :limits_ordered
     enum :data_type, { numeric: 0, string: 1, enumerated: 2 }
+
+    def externalize
+        "#{loinc_code}: #{description}"
+    end
 
     private
 

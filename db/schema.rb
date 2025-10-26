@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_21_165649) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_22_163819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_21_165649) do
     t.datetime "updated_at", null: false
     t.index ["city", "country"], name: "index_municipalities_on_city_and_country"
     t.index ["postal_code", "country"], name: "index_municipalities_on_postal_code_and_country"
+  end
+
+  create_table "observations", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.bigint "order_id", null: false
+    t.bigint "property_id", null: false
+    t.string "value"
+    t.string "unit"
+    t.string "alternate_unit"
+    t.string "alternate_unit_coding_system"
+    t.string "references_range"
+    t.string "abnormal_flags"
+    t.integer "result_status"
+    t.datetime "observation_date_time"
+    t.datetime "analysis_date_time"
+    t.text "observation_comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_observations_on_order_id"
+    t.index ["patient_id"], name: "index_observations_on_patient_id"
+    t.index ["property_id"], name: "index_observations_on_property_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -106,6 +127,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_21_165649) do
   end
 
   add_foreign_key "hc_providers", "municipalities"
+  add_foreign_key "observations", "orders"
+  add_foreign_key "observations", "patients"
+  add_foreign_key "observations", "properties"
   add_foreign_key "orders", "hc_providers", column: "ordering_provider_id"
   add_foreign_key "orders", "patients"
   add_foreign_key "patients", "municipalities"

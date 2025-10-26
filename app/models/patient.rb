@@ -1,6 +1,7 @@
 class Patient < ApplicationRecord
   belongs_to :municipality
   has_many :orders, dependent: :destroy
+  has_many :observations, dependent: :destroy
 
   validates :first_name, presence: true
   validates :surname, presence: true

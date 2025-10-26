@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders do
+    resources :observations, only: %i[new create edit update destroy]
+  end
   resources :properties
   resources :hc_providers
   resources :patients
@@ -15,5 +17,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "patients#index"
 end

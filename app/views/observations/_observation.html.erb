@@ -1,0 +1,8 @@
+<th class="px-6 py-4 font-medium text-gray-900"><%= observation.id %></th>
+<td class="px-6 py-4"><%= observation.property.description %></td>
+<td class="px-6 py-4"><%= observation.value %></td>
+<td class="px-6 py-4"><%= observation.unit %></td>
+<td class="px-6 py-4"><%= observation.references_range %></td>
+<td class="px-6 py-4"><%= observation.abnormal_flags %></td>
+<td class="px-6 py-4"><%= observation.result_status %></td>
+<td class="px-6 py-4"><%= observation.observation_date_time.strftime("%d/%m/%Y %H:%M:%S") %></td>
