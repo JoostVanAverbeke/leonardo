@@ -8,7 +8,9 @@ class GetPatientsTool < ApplicationTool
         The patients are ordered by surname and first name.
         If there are no patients, it will return an empty array.
         Matching criteria are:
-        - none (all patients are returned)
+        - none (first 100 patients are returned)
+        - id (exact match, returns  single patient)
+        - limit (maximum number of patients to retrieve)
         - surname and/or first name (partial matches allowed)
         - birth date (exact match)
         - national number (exact match)
@@ -67,22 +69,47 @@ class GetPatientsTool < ApplicationTool
     DESC
 
     arguments do
-        optional(:surname).filled(:string).description("The surname to filter patients by. Partial matches are allowed.")
-        optional(:first_name).filled(:string).description("The first name to filter patients by. Partial matches are allowed.")
-        optional(:birth_date).filled(:date).description("The birth date to filter patients by. Exact match only.")
-        optional(:national_number).filled(:string).description("The national number to filter patients by. Exact match only.")
-        optional(:email).filled(:string).description("The email to filter patients by. Exact match only.")
-        optional(:municipality_id).filled(:integer).description("The municipality ID to filter patients by. Exact match only.")
+        optional(:id)
+            .filled(:integer)
+            .description("The ID of the patient to retrieve. This will return a single patient.")
+        optional(:limit)
+            .filled(:integer)
+            .description("The maximum number of patients to retrieve. Default is 100.")
+        optional(:surname)
+            .filled(:string)
+            .description("The surname to filter patients by. Partial matches are allowed.")
+        optional(:first_name)
+            .filled(:string).
+            description("The first name to filter patients by. Partial matches are allowed.")
+        optional(:birth_date)
+            .filled(:date)
+            .description("The birth date to filter patients by. Exact match only.")
+        optional(:national_number)
+            .filled(:string)
+            .description("The national number to filter patients by. Exact match only.")
+        optional(:email)
+            .filled(:string)
+            .description("The email to filter patients by. Exact match only.")
+        optional(:municipality_id)
+            .filled(:integer)
+            .description("The municipality ID to filter patients by. Exact match only.")
     end
 
-    def call(surname: nil, first_name: nil, birth_date: nil, national_number: nil, email: nil, municipality_id: nil)
-        patients = Patient.order(:surname, :first_name)
-        patients = patients.where("surname ILIKE ?", "%#{surname}%") if surname
-        patients = patients.where("first_name ILIKE ?", "%#{first_name}%") if first_name
-        patients = patients.where(birth_date: birth_date) if birth_date
-        patients = patients.where(national_number: national_number) if national_number
-        patients = patients.where(email: email) if email
-        patients = patients.where(municipality_id: municipality_id) if municipality_id
+    def call(limit: 100, id: nil, surname: nil, first_name: nil, birth_date: nil,
+            national_number: nil, email: nil, municipality_id: nil)
+        patients = []
+        if id
+            patient = Patient.find_by(id: id)
+            patients << patient if patient
+        else
+            patients = Patient.order(:surname, :first_name).limit(limit)
+            patients = patients.where("surname ILIKE ?", "%#{surname}%") if surname
+            patients = patients.where("first_name ILIKE ?", "%#{first_name}%") if first_name
+            patients = patients.where(birth_date: birth_date) if birth_date
+            patients = patients.where(national_number: national_number) if national_number
+            patients = patients.where(email: email) if email
+            patients = patients.where(municipality_id: municipality_id) if municipality_id
+        end
         patients.map do |patient|
             {
                 id: patient.id,

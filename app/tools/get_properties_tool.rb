@@ -72,7 +72,7 @@ class GetPropertiesTool < ApplicationTool
       properties = properties.where(loinc_code: loinc_code) if loinc_code
       properties = properties.where("mnemonic ILIKE ?", "%#{mnemonic}%") if mnemonic
       properties = properties.where("description ILIKE ?", "%#{description}%") if description
-    end  
+    end
     properties.map do |property|
       {
         id: property.id,
@@ -87,5 +87,7 @@ class GetPropertiesTool < ApplicationTool
         updated_at: property.updated_at.iso8601
       }
     end
+    rescue StandardError => e
+            { error: e.message }
   end
 end
