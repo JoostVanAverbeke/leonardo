@@ -6,8 +6,9 @@
   <% end %>
 
   <h1 class="font-bold text-4xl">Showing hc provider</h1>
-
-  <%= render @hc_provider %>
+  <div class="my-6 border-t border-gray-200">
+    <%= render @hc_provider %>
+  </div>  
 
   <%= link_to "Edit this hc provider", edit_hc_provider_path(@hc_provider), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to hc providers", hc_providers_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
