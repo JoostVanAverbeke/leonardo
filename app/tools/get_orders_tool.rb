@@ -32,7 +32,7 @@ class GetOrdersTool < ApplicationTool
                     "birth_date": "1990-01-01",
                     "gender": "male",
                     "national_number": "123456789"
-                }
+                },
                 "ordering_provider": {
                     "id": 10,
                     "mnemonic": "HP1",
@@ -59,7 +59,7 @@ class GetOrdersTool < ApplicationTool
                     "birth_date": "1985-05-15",
                     "gender": "female",
                     "national_number": "987654321"
-                }
+                },
                 "ordering_provider": {
                     "id": 11,
                     "mnemonic": "HP2",
@@ -129,19 +129,19 @@ class GetOrdersTool < ApplicationTool
         filler_order_number: order.filler_order_number,
         priority: order.priority,
         order_status: order.order_status,
-        patient: order.patient ? { 
+        patient: order.patient ? {
           id: order.patient.id,
           first_name: order.patient.first_name,
           surname: order.patient.surname,
-          birth_date: order.patient.birth_date.iso8601,
-          gender: order.patient.gender
+          birth_date: order.patient.birth_date ? order.patient.birth_date.iso8601 : nil,
+          gender: order.patient.gender,
           national_number: order.patient.national_number
         } : nil,
         ordering_provider: order.ordering_provider ? {
           id: order.ordering_provider.id,
           mnemonic: order.ordering_provider.mnemonic,
           first_name: order.ordering_provider.first_name,
-          surname: order.ordering_provider.surname
+          surname: order.ordering_provider.surname,
           identifier: order.ordering_provider.identifier
         } : nil,
         relevant_clinical_information: order.relevant_clinical_information,
