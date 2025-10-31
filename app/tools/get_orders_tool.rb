@@ -74,7 +74,7 @@ class GetOrdersTool < ApplicationTool
                 "updated_at": "2023-10-02T12:00:00Z
             }
         ]
-    DESC
+  DESC
   arguments do
     optional(:id)
       .filled(:integer)
