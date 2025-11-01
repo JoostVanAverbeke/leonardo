@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_22_163819) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_01_143032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -66,8 +66,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_22_163819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_observations_on_order_id"
+    t.index ["patient_id", "observation_date_time", "property_id", "analysis_date_time"], name: "index_observations_on_patient_obsdate_property_analysisdate", order: { observation_date_time: :desc, analysis_date_time: :desc }
+    t.index ["patient_id", "property_id", "observation_date_time", "analysis_date_time"], name: "index_observations_on_patient_property_obsdate_analysisdate", order: { observation_date_time: :desc, analysis_date_time: :desc }
     t.index ["patient_id"], name: "index_observations_on_patient_id"
+    t.index ["property_id", "analysis_date_time"], name: "index_observations_on_property_analysisdate", order: { analysis_date_time: :desc }
+    t.index ["property_id", "observation_date_time"], name: "index_observations_on_property_obsdate", order: { observation_date_time: :desc }
     t.index ["property_id"], name: "index_observations_on_property_id"
+    t.index ["result_status"], name: "index_observations_on_result_status"
   end
 
   create_table "orders", force: :cascade do |t|
