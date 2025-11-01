@@ -11,6 +11,32 @@
     <%= render @patient %>
   </div>
 
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Orders</h1>
+  </div>
+  
+  <div id="orders" class="min-w-full">
+    <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Id</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Receipt Time</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Filler Order Number</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Ordering Provider</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Priority</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">Order Status</th>
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+        <% @patient.orders.each do |order| %>
+          <tr id="<%= dom_id order %>">
+            <%= render order, locals: { display_patient: false } %> 
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
   <%= link_to "Edit this patient", edit_patient_path(@patient), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to patients", patients_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= button_to "Destroy this patient", @patient, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
