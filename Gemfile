@@ -84,6 +84,9 @@ group :development, :test do
   # Faker, a port of Data::Faker from Perl, is used to easily generate fake data:
   # names, addresses, phone numbers
   gem "faker", "~> 3.5", ">= 3.5.2"
+
+  # Autoload dotenv in Rails.
+  gem "dotenv-rails", "~> 3.1", ">= 3.1.8"
 end
 
 group :development do

@@ -10,15 +10,16 @@ services:
       - "3000:3000"
     environment:
       RAILS_ENV: development
-      DB_HOST: db
+      DB_HOST: postgres
+      DB_PORT: 5432
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
-      DATABASE_URL: postgres://postgres:postgres@db:5432/leonardo_development
     depends_on:
     - postgres
 
   postgres:
     image: postgres:16.1
+    hostname: postgres
     restart: unless-stopped
     networks:
     - default
@@ -27,7 +28,6 @@ services:
     environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: leonardo_development
     ports:
       - "15432:5432"
 volumes:

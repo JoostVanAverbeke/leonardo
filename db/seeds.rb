@@ -16,13 +16,13 @@ def create_patients_orders_observations(municipality, hc_provider)
         puts "Created patient #{patient.first_name} #{patient.surname} in #{patient.municipality.postal_code} #{patient.municipality.city}, #{patient.municipality.country}"
         3.times do
             order = FactoryBot.create(:order, patient: patient, ordering_provider_id: hc_provider.id)
-            puts "Created order #{order.placer_order_number} for patient #{patient.first_name} #{patient.surname} by provider #{hc_provider.mnemonic}"
+            puts "Created order #{order.filler_order_number} for patient #{patient.first_name} #{patient.surname} by provider #{hc_provider.mnemonic}"
             observations_count = rand(1..15)
             property_counts = Property.count
             observations_count.times do
                 property = Property.find(rand(1..property_counts))
                 observation = FactoryBot.create(:observation, patient: patient, order: order, property: property)
-                puts "  Created observation #{observation.id} for order #{order.placer_order_number} (property: #{property.mnemonic}, value: #{observation.value} #{observation.unit})"
+                puts "  Created observation #{observation.id} for order #{order.filler_order_number} (property: #{property.mnemonic}, value: #{observation.value} #{observation.unit})"
             end
         end
     end
