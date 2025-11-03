@@ -13,7 +13,7 @@
                 <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
               </svg>
             <% end %>
-          <% end %>  
+          <% end %>
         </li>
         <li>
           <span class="inline-flex items-center rounded-md bg-white px-4 py-2 text-gray-500">Page <b class="mx-1"><%= @patients.current_page %></b> of <b class="ml-1"><%= @patients.total_pages %></b></span>
@@ -31,8 +31,13 @@
     </nav>
   </div>
 
+  <form method="get" action="<%= patients_path %>" class="mb-4 flex gap-2">
+    <input type="text" name="search" value="<%= params[:search] %>" placeholder="Search by surname, first name" class="rounded-lg border px-3 py-2" />
+    <button type="submit" class="rounded-lg py-2 px-4 bg-blue-600 text-white font-medium">Search</button>
+  </form>
+
   <% content_for :title, "Patients" %>
-  
+
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Patients</h1>
     <%= link_to "New patient", new_patient_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
@@ -47,7 +52,7 @@
           <th scope="col" class="px-6 py-4 font-medium text-gray-900">First name</th>
           <th scope="col" class="px-6 py-4 font-medium text-gray-900">Birthdate</th>
           <th scope="col" class="px-6 py-4 font-medium text-gray-900">Gender</th>
-          <th scope="col" class="px-6 py-4 font-medium text-gray-900">National Number</th>          
+          <th scope="col" class="px-6 py-4 font-medium text-gray-900">National Number</th>
           <th scope="col" class="px-6 py-4 font-medium text-gray-900"></th>
         </tr>
       </thead>
@@ -58,7 +63,7 @@
             <td class="flex justify-end gap-4 px-6 py-4 font-medium">
               <%= link_to "Show", patient, class: "text-primary-700" %>
               <%= link_to "Edit", edit_patient_path(patient) %>
-          </tr>  
+          </tr>
         <% end %>
       </tbody>
     </table>
