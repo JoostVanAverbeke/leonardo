@@ -156,7 +156,7 @@ class GetObservationsTool < ApplicationTool
             {
                 id: observation.id,
                 value: observation.value,
-                unit: observation.units_of_measure,
+                unit: observation.unit,
                 alternate_unit: observation.alternate_unit,
                 alternate_unit_coding_system: observation.alternate_unit_coding_system,
                 references_range: observation.references_range,
