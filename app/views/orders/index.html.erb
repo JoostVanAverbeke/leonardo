@@ -13,7 +13,7 @@
                 <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
               </svg>
             <% end %>
-          <% end %>  
+          <% end %>
         </li>
         <li>
           <span class="inline-flex items-center rounded-md bg-white px-4 py-2 text-gray-500">Page <b class="mx-1"><%= @orders.current_page %></b> of <b class="ml-1"><%= @orders.total_pages %></b></span>
@@ -29,10 +29,15 @@
         </li>
       </ul>
     </nav>
+    <%= form_with url: orders_path, method: :get, local: true, class: "mb-4 flex gap-2" do %>
+      <%= label_tag :filler_order_number, "Search Filler Order Number:", class: "font-medium" %>
+      <%= text_field_tag :filler_order_number, params[:filler_order_number], class: "rounded-lg border px-3 py-2" %>
+      <%= submit_tag "Search", class: "rounded-lg py-2 px-4 bg-blue-600 text-white font-medium" %>
+    <% end %>
   </div>
 
   <% content_for :title, "Orders" %>
-  
+
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Orders</h1>
     <%= link_to "New order", new_order_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
@@ -59,7 +64,7 @@
             <td class="flex justify-end gap-4 px-6 py-4 font-medium">
               <%= link_to "Show", order, class: "text-primary-700" %>
               <%= link_to "Edit", edit_order_path(order) %>
-          </tr>  
+          </tr>
         <% end %>
       </tbody>
     </table>
