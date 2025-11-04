@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SampleTool < ApplicationTool
-  description "Greet a user"
+  description "Greet a patient by their first name, surname."
 
   # Optional: Add annotations to provide hints about the tool's behavior
   # annotations(
@@ -16,8 +16,8 @@ class SampleTool < ApplicationTool
   end
 
   def call(id:, prefix: "Hey")
-    user = User.find(id)
+    patient = Patient.find(id)
 
-    "#{prefix} #{user.first_name} !"
+    "#{prefix} #{patient.first_name} #{patient.surname} !"
   end
 end

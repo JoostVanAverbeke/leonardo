@@ -15,15 +15,7 @@ class Patient < ApplicationRecord
 
   enum :gender, { male: 0, female: 1, other: 2 }
 
-  scope :search, ->(search_term) {
-    surname_term, first_name_term = search_term.to_s.strip.split(/\s+/, 2)
-    unless surname_term.blank?
-      where("surname ILIKE ?", "%#{surname_term}%")
-    end
-    unless first_name_term.blank?
-      where("first_name ILIKE ?", "%#{first_name_term}%")
-    end
-  }
+  scope :search, ->(search_surname_term) { where("surname ILIKE ?", "%#{search_surname_term}%") }
 
   def externalize
     "#{surname} #{first_name}, #{birth_date}"
