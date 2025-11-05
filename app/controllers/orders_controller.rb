@@ -3,7 +3,9 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.order(receipt_time: :desc).page(params[:page])
+    @orders = Order.order(receipt_time: :desc)
+    @orders = @orders.search(params[:search]) if params[:search].present?
+    @orders = @orders.page(params[:page])
   end
 
   # GET /orders/1 or /orders/1.json

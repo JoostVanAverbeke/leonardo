@@ -10,6 +10,9 @@ class Order < ApplicationRecord
   enum :priority, { routine: 0, urgent: 1, stat: 2 }
   enum :order_status, { new_order: 0, in_progress: 1, completed: 2, cancelled: 3 }
 
+  scope :search, ->(search_order_filler_numer_term) { where("filler_order_number ILIKE ?",
+                                                            "%#{search_order_filler_numer_term}%") }
+
   def ordering_provider
     HcProvider.find(ordering_provider_id)
   end
