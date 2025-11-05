@@ -31,7 +31,7 @@
       <tbody class="divide-y divide-gray-100 border-t border-gray-100">
         <% @patient.orders.each do |order| %>
           <tr id="<%= dom_id order %>">
-            <%= render order, locals: { display_patient: false } %> 
+            <%= render order, display_patient: false %> 
         <% end %>
       </tbody>
     </table>
