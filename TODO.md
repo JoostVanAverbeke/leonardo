@@ -1,7 +1,5 @@
-# Roadmap
-- Fix order view patient name is not shown in index view
-Code Fix in app/views/orders/index.html.erb:
-  <%= render order, display_patient: true %>
+## Roadmap
+- Add tool to generate a markdown order results report
 
-- Add search functionality to patients index view
-- Add search functionality to orders index view
+## Testing
+- Test interaction with graph mcp server
