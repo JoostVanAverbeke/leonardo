@@ -8,6 +8,6 @@
 
 - Generate a leonardo application order results report for the order with order filler number 20251023-24321445
 
-- Is Bart Simpson, registered in the leornardo application, a diabetic patient?
+- Is Bart Simpson, registered in the leonardo application, a diabetic patient?
 
 - Generate a line chart of all the observations of property with loinc code 2339-0 of patient Bart Simpson
