@@ -1,6 +1,6 @@
 # Prompts
 ## Simple prompts
-- Say hey to leonardo application patient with id 2168
+- Say hey to patient with id 2168, registered in the leonardo application.
 
 ## More complex examples
 
@@ -8,4 +8,6 @@
 
 - Generate a leonardo application order results report for the order with order filler number 20251023-24321445
 
-- Generate an line chart of all the observations of property with loinc code 2339-0 of patient Bart Simpson
+- Is Bart Simpson, registered in the leornardo application, a diabetic patient?
+
+- Generate a line chart of all the observations of property with loinc code 2339-0 of patient Bart Simpson
