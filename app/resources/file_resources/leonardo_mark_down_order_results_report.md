@@ -5,29 +5,28 @@ The layout is designed to be clear and easy to follow.
 
 Expected report layout:
 
-# Header
+Header layout:
 
-The header contains on the left side the patients details and some order information:
+The header contains on the left side the patients details and some order information. Each item should be on a separate line:
 - Order Filler Number
 - Full name
 - Birth date
 - National number
 - Gender
 - Contact information (email, phone, mobile phone)
-On the right side of the header, the report contains the ordering provider details:
+On the right side of the header, the report contains the ordering provider details. Each item should be on a separate line:
 - Full name
 - Hc Provider mnemonic
 - Identifier (if available)
-Each line in the header is separated by a horizontal line.
 
-# Footer
+Footer layout:
 
 The footer includes:
 - Report generation date and time
 - Laboratory contact information = "simpson.lab@example.com"
 - Page number
 
-# Body
+Body layout:
 The body of the report includes:
 - A title with the order results report name = "Biochemistry Results"
 - Create a table to display order results with the following columns:
@@ -40,6 +39,6 @@ The body of the report includes:
 - Observation date and time
 Each observation is presented in a separate row within the table.
 
-# Output Format
+Output Format:
 Return the output strictly in Markdown format, using correct syntax for all elements included.
 Do not include any explanatory text outside the Markdown content.

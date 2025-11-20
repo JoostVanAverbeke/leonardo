@@ -2,7 +2,7 @@
 ## Simple prompts
 - Say hey to patient with id 2168, registered in the leonardo application.
 
-- List all patients registered in the leonardo application with surname matching "mith".
+- List all patients registered in the leonardo application with surname matching "mit".
   
 - List all patients registered in the leonardo application that are older than 95 years.
 
