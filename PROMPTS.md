@@ -2,11 +2,15 @@
 ## Simple prompts
 - Say hey to patient with id 2168, registered in the leonardo application.
 
+- List all patients registered in the leonardo application with surname matching "mith".
+  
+- List all patients registered in the leonardo application that are older than 95 years.
+
 ## More complex examples
 
 - List all the patients and the corresponding order_filler_number in the leonardo application that have an observation with loinc code 9482-1, result status validated and a value higher than 750.
 
-- Generate a leonardo application order results report for the order with order filler number 20251023-24321445
+- Generate a leonardo application order results report for the order with order filler number 20251030-23676268 (Not working)
 
 - Is Bart Simpson, registered in the leonardo application, a diabetic patient?
 
