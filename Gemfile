@@ -53,7 +53,7 @@ gem "dotenv"
 gem "fast-mcp", "~> 1.6"
 
 # Integrate Tailwind CSS with the asset pipeline in Rails.
-gem "tailwindcss-rails", "~> 4.3"
+gem "tailwindcss-rails", "~> 4.4"
 
 # Provides a simple helper to get an HTML select list of countries.
 gem "country_select", "~> 11.0"
