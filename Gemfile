@@ -94,5 +94,5 @@ group :development do
   gem "web-console"
 
   # Automatically reload Hotwire Turbo when app files are modified.
-  gem "hotwire-livereload", "~> 2.0"
+  gem "hotwire-livereload", "~> 2.1"
 end
